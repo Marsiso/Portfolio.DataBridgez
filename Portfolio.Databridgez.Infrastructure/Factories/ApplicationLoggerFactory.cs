@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Portfolio.Databridgez.Domain.Options;
+using Portfolio.Databridgez.Domain.Options.Serilog;
 using Serilog.Exceptions;
 
 namespace Portfolio.Databridgez.Infrastructure.Factories;
@@ -47,26 +49,21 @@ public static class ApplicationLoggerFactory
     }
 
     private static LoggerConfiguration ConfigureLogEventSinks(this LoggerConfiguration configurationBuilder,
-        IConfiguration config)
+        IConfiguration configuration)
     {
+        var serilogOptions = new SerilogSinkOptions();
+        configuration.GetSection(nameof(SerilogSinkOptions)).Bind(serilogOptions);
+        
         return configurationBuilder
             .WriteTo.Console(LogEventLevel.Debug,
-                outputTemplate: config["Serilog:Sinks:Console:OutputTemplate"] ??
-                throw new InvalidOperationException(
-                    "Configuration file does not contain definition for console output template"))
+                outputTemplate: serilogOptions.Console.OutputTemplate)
             .WriteTo.File(
-                path: config["Serilog:Sinks:File:Path"] ??
-                throw new InvalidOperationException(
-                    "Configuration file does not contain definition for log file destination"),
+                path: serilogOptions.File.Path,
                 LogEventLevel.Warning,
                 rollingInterval: RollingInterval.Day,
-                outputTemplate: config["Serilog:Sinks:File:OutputTemplate"] ??
-                                throw new InvalidOperationException(
-                                    "Configuration file does not contain definition for log file output template"))
+                outputTemplate: serilogOptions.File.OutputTemplate)
             .WriteTo.Seq(
-                serverUrl: config["Serilog:Sinks:Seq:ServerUrl"] ??
-                throw new InvalidOperationException(
-                    "Configuration file does not contain definition for Seq server url"),
+                serverUrl: serilogOptions.Seq.ServerUrl,
                 LogEventLevel.Debug);
     }
 }

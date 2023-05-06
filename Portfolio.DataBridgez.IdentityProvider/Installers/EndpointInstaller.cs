@@ -6,7 +6,7 @@ public sealed class EndpointInstaller : IInstaller
 {
     public void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddControllers();
+        services.AddMvc();
         services.AddEndpointsApiExplorer();
     }
 }

@@ -1,3 +1,6 @@
+using Portfolio.Databridgez.Domain.Options;
+using Portfolio.Databridgez.Domain.Options.Swagger;
+
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
@@ -17,8 +20,17 @@ try
     
     if (app.Environment.IsDevelopment())
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        var swaggerOptions = new SwaggerOptions();
+        app.Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+        
+        app.UseSwagger(option =>
+        {
+            option.RouteTemplate = swaggerOptions.RouteTemplate;
+        });
+        app.UseSwaggerUI(option =>
+        {
+            option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
+        });
     }
 
     app.UseHttpsRedirection();
