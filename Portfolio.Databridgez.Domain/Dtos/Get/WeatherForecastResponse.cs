@@ -1,6 +1,6 @@
-namespace Portfolio.DataBridgez.IdentityProvider;
+namespace Portfolio.Databridgez.Domain.Dtos.Get;
 
-public class WeatherForecast
+public class WeatherForecastResponse
 {
     public DateOnly Date { get; set; }
 
