@@ -1,21 +1,15 @@
-
-using Portfolio.Databridgez.Infrastructure.Factories;
-using Serilog;
-
-var config = new ConfigurationBuilder()
+var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 
-Log.Logger = ApplicationLoggerFactory.GetLogger(config);
+Log.Logger = ApplicationLoggerFactory.GetLogger(configuration);
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog();
-    builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+    builder.Services.InstallServicesInAssembly(builder.Configuration);
 
     var app = builder.Build();
 

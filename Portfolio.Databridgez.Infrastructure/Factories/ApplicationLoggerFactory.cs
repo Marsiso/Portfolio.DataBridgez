@@ -11,28 +11,28 @@ public static class ApplicationLoggerFactory
     /// <summary>
     ///     Gets pre-configured concrete instance of <see cref="ILogger" /> abstraction.
     /// </summary>
-    /// <param name="config"></param>
+    /// <param name="configuration"></param>
     /// <returns></returns>
-    public static ILogger GetLogger(IConfiguration config)
+    public static ILogger GetLogger(IConfiguration configuration)
     {
-        var configBuilder = new LoggerConfiguration()
+        var configurationBuilder = new LoggerConfiguration()
             .OverrideMinimumLoggingLevels()
             .ConfigureLogEventEnrichment()
-            .ConfigureLogEventSinks(config);
+            .ConfigureLogEventSinks(configuration);
 
-        return configBuilder.CreateLogger();
+        return configurationBuilder.CreateLogger();
     }
 
-    private static LoggerConfiguration OverrideMinimumLoggingLevels(this LoggerConfiguration configBuilder)
+    private static LoggerConfiguration OverrideMinimumLoggingLevels(this LoggerConfiguration configurationBuilder)
     {
-        return configBuilder
+        return configurationBuilder
             .MinimumLevel.Override("System", LogEventLevel.Warning)
             .MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
     }
 
-    private static LoggerConfiguration ConfigureLogEventEnrichment(this LoggerConfiguration configBuilder)
+    private static LoggerConfiguration ConfigureLogEventEnrichment(this LoggerConfiguration configurationBuilder)
     {
-        return configBuilder
+        return configurationBuilder
             .Enrich.WithMachineName()
             .Enrich.WithEnvironmentName()
             .Enrich.WithEnvironmentUserName()
@@ -46,10 +46,10 @@ public static class ApplicationLoggerFactory
             .Enrich.FromLogContext();
     }
 
-    private static LoggerConfiguration ConfigureLogEventSinks(this LoggerConfiguration configBuilder,
+    private static LoggerConfiguration ConfigureLogEventSinks(this LoggerConfiguration configurationBuilder,
         IConfiguration config)
     {
-        return configBuilder
+        return configurationBuilder
             .WriteTo.Console(LogEventLevel.Debug,
                 outputTemplate: config["Serilog:Sinks:Console:OutputTemplate"] ??
                 throw new InvalidOperationException(
