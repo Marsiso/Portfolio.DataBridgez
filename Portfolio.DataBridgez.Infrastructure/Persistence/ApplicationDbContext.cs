@@ -6,7 +6,9 @@ using Portfolio.DataBridgez.Infrastructure.Persistence.Configuration;
 namespace Portfolio.DataBridgez.Infrastructure.Persistence;
 
 /// <summary>
-///     Application database context for interaction with database system.
+///     Application database context that extends ASP.NET Core Identity
+///     <see cref="IdentityDbContext{TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken}"/>.
+///     context.
 /// </summary>
 public sealed class ApplicationDbContext : IdentityDbContext<
     User,

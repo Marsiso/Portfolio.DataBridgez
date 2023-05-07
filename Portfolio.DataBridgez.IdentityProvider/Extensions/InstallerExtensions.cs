@@ -1,12 +1,12 @@
 ﻿namespace Portfolio.DataBridgez.IdentityProvider.Extensions;
 
 /// <summary>
-///     <see cref="IInstaller" /> abstraction layer extension methods.
+///     <see cref="IInstaller" /> abstraction extension methods.
 /// </summary>
 public static class InstallerExtensions
 {
     /// <summary>
-    ///     Executes every implementation of <see cref="IInstaller" /> in assembly.
+    ///     Initializes and executes every implementation of <see cref="IInstaller" /> in assembly.
     /// </summary>
     /// <param name="services">Application abstraction for collection of services.</param>
     /// <param name="configuration">Application abstraction for configuration properties.</param>

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Portfolio.DataBridgez.Domain.Entities;
 using static Portfolio.DataBridgez.Domain.Constants.DbDefaults;
-using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Tables.UserTokens.Columns;
+using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Table.UserToken.Column;
 
 namespace Portfolio.DataBridgez.Infrastructure.Persistence.Configuration;
 
@@ -13,30 +13,30 @@ public sealed class UserTokenConfiguration : IEntityTypeConfiguration<UserToken>
 {
     public void Configure(EntityTypeBuilder<UserToken> builder)
     {
-        builder.ToTable(Tables.UserTokens.TableName, SchemaName);
+        builder.ToTable(Table.UserToken.TableName, SchemaName);
 
         builder.HasKey(ut => new { ut.LoginProvider, ut.UserId, ut.Name })
             .IsClustered();
 
         builder.Property(ut => ut.UserId)
             .IsRequired()
-            .HasColumnName(UserIdentifierFieldName);
+            .HasColumnName(UserPrimaryKeyColumnName);
 
         builder.Property(ut => ut.Name)
             .IsUnicode()
             .IsRequired()
-            .HasMaxLength(MaximumNameLength)
-            .HasColumnName(NameFieldName);
+            .HasMaxLength(MaximumNameLengthConstraint)
+            .HasColumnName(NameColumnName);
         
         builder.Property(ut => ut.LoginProvider)
             .IsUnicode()
             .IsRequired()
-            .HasMaxLength(MaximumLoginProviderLength)
-            .HasColumnName(LoginProviderFieldName);
+            .HasMaxLength(MaximumLoginProviderLengthConstraint)
+            .HasColumnName(LoginProviderColumnName);
         
         builder.Property(ut => ut.Value)
             .IsUnicode()
             .IsRequired(false)
-            .HasColumnName(ValueFieldName);
+            .HasColumnName(ValueColumnName);
     }
 }

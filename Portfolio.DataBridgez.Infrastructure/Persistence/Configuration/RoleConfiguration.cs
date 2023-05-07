@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Portfolio.DataBridgez.Domain.Entities;
 using static Portfolio.DataBridgez.Domain.Constants.DbDefaults;
-using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Tables.Roles.Columns;
+using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Table.Role.Column;
 
 namespace Portfolio.DataBridgez.Infrastructure.Persistence.Configuration;
 
@@ -13,7 +13,7 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
     public void Configure(EntityTypeBuilder<Role> builder)
     {
-        builder.ToTable(Tables.Roles.TableName, SchemaName);
+        builder.ToTable(Table.Role.TableName, SchemaName);
 
         builder.HasKey(r => r.Id)
             .IsClustered();
@@ -25,23 +25,23 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(r => r.Id)
             .IsRequired()
             .UseIdentityColumn()
-            .HasColumnName(IdentifierFieldName);
+            .HasColumnName(PrimaryKeyColumnName);
         
         builder.Property(r => r.Name)
             .IsRequired(false)
             .IsUnicode()
-            .HasColumnName(NameFieldName)
-            .HasMaxLength(MaximumNameLength);
+            .HasColumnName(NameColumnName)
+            .HasMaxLength(MaximumNameLengthConstraint);
         
         builder.Property(r => r.NormalizedName)
             .IsRequired(false)
             .IsUnicode()
-            .HasColumnName(NormalizedNameFieldName)
-            .HasMaxLength(MaximumNameLength);
+            .HasColumnName(NormalizedNameColumnName)
+            .HasMaxLength(MaximumNameLengthConstraint);
 
         builder.Property(r => r.ConcurrencyStamp)
             .IsRequired(false)
-            .HasColumnName(ConcurrencyStampFieldName)
+            .HasColumnName(ConcurrencyStampColumnName)
             .IsConcurrencyToken();
 
         builder.HasMany(r => r.Users)

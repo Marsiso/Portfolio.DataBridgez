@@ -3,32 +3,19 @@
 namespace Portfolio.DataBridgez.Domain.Entities;
 
 /// <summary>
-///     Role claim entity in database system.
+///     ASP.NET Core Identity <see cref="IdentityRoleClaim{TKey}"/> model extension.
 /// </summary>
 public sealed class RoleClaim : IdentityRoleClaim<long>
 {
     /// <summary>
-    ///     Unique identifier.
+    ///     Private constructor used by Entity Framework Core.
     /// </summary>
-    public override int Id { get; set; }
+    private RoleClaim()
+    {
+    }
     
     /// <summary>
-    ///     Role that claim belongs to identifier.
-    /// </summary>
-    public override long RoleId { get; set; }
-    
-    /// <summary>
-    ///     Claim type.
-    /// </summary>
-    public override string? ClaimType { get; set; }
-    
-    /// <summary>
-    ///     Claim value.
-    /// </summary>
-    public override string? ClaimValue { get; set; }
-
-    /// <summary>
-    ///    Role that claim belongs to. 
+    ///    Each role can have many claims.
     /// </summary>
     public Role Role { get; set; } = default!;
 }

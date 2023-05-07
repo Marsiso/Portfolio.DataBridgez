@@ -3,6 +3,9 @@ using Portfolio.DataBridgez.Domain.Options.Swagger;
 
 namespace Portfolio.DataBridgez.IdentityProvider.Installers;
 
+/// <summary>
+///     Registers services related to OpenAPI.
+/// </summary>
 public sealed class SwaggerInstaller : IInstaller
 {
     public void RegisterServices(IServiceCollection services, IConfiguration configuration)

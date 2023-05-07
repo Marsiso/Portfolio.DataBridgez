@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Portfolio.DataBridgez.Domain.Entities;
 using static Portfolio.DataBridgez.Domain.Constants.DbDefaults;
-using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Tables.Users.Columns;
+using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Table.User.Column;
 
 namespace Portfolio.DataBridgez.Infrastructure.Persistence.Configuration;
 
@@ -13,7 +13,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.ToTable(Tables.Users.TableName, SchemaName);
+        builder.ToTable(Table.User.TableName, SchemaName);
 
         builder.HasKey(u => u.Id)
             .IsClustered();
@@ -29,40 +29,40 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Id)
             .IsRequired()
             .UseIdentityColumn()
-            .HasColumnName(IdentifierFieldName);
+            .HasColumnName(PrimaryKeyColumnName);
 
         builder.Property(u => u.UserName)
             .IsRequired(false)
             .IsUnicode()
-            .HasColumnName(UserNameFieldName)
-            .HasMaxLength(MaximumUserNameLength);
+            .HasColumnName(UserNameColumnName)
+            .HasMaxLength(MaximumUserNameLengthConstraint);
         
         builder.Property(u => u.NormalizedUserName)
             .IsRequired(false)
             .IsUnicode()
-            .HasColumnName(NormalizedUserNameFieldName)
-            .HasMaxLength(MaximumUserNameLength);
+            .HasColumnName(NormalizedUserNameColumnName)
+            .HasMaxLength(MaximumUserNameLengthConstraint);
         
         builder.Property(u => u.Email)
             .IsRequired(false)
             .IsUnicode()
-            .HasColumnName(EmailFieldName)
-            .HasMaxLength(MaximumEmailLength);
+            .HasColumnName(EmailColumnName)
+            .HasMaxLength(MaximumEmailLengthConstraint);
         
         builder.Property(u => u.NormalizedEmail)
             .IsRequired(false)
             .IsUnicode()
-            .HasColumnName(NormalizedEmailFieldName)
-            .HasMaxLength(MaximumEmailLength);
+            .HasColumnName(NormalizedEmailColumnName)
+            .HasMaxLength(MaximumEmailLengthConstraint);
 
         builder.Property(u => u.EmailConfirmed)
             .IsRequired()
             .HasDefaultValue(false)
-            .HasColumnName(EmailConfirmedFieldName);
+            .HasColumnName(EmailConfirmedColumnName);
         
         builder.Property(u => u.PasswordHash)
             .IsUnicode()
-            .HasColumnName(PasswordHashFieldName);
+            .HasColumnName(PasswordHashColumnName);
         
         builder.Property(u => u.ConcurrencyStamp)
             .IsRequired(false)
@@ -78,26 +78,26 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.PhoneNumber)
             .IsRequired(false)
             .IsUnicode()
-            .HasColumnName(PhoneNumberFieldName);
+            .HasColumnName(PhoneNumberColumnName);
         
         builder.Property(u => u.PhoneNumberConfirmed)
             .IsRequired()
             .HasDefaultValue(false)
-            .HasColumnName(PhoneNumberConfirmedFieldName);
+            .HasColumnName(PhoneNumberConfirmedColumnName);
         
         builder.Property(u => u.TwoFactorEnabled)
             .IsRequired()
             .HasDefaultValue(false)
-            .HasColumnName(TwoFactorEnabledFieldName);
+            .HasColumnName(TwoFactorEnabledColumnName);
         
         builder.Property(u => u.LockoutEnd)
             .IsRequired(false)
-            .HasColumnName(LockOutEndFieldName);
+            .HasColumnName(LockoutEndColumnName);
         
         builder.Property(u => u.LockoutEnabled)
             .IsRequired()
             .HasDefaultValue(true)
-            .HasColumnName(LockOutEnabledFieldName);
+            .HasColumnName(LockoutEnabledColumnName);
         
         builder.Property(u => u.AccessFailedCount)
             .IsRequired()

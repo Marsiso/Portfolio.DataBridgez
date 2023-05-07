@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Portfolio.DataBridgez.Domain.Entities;
 using static Portfolio.DataBridgez.Domain.Constants.DbDefaults;
-using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Tables.UserClaims.Columns;
+using static Portfolio.DataBridgez.Domain.Constants.DbDefaults.Table.UserClaim.Columns;
 
 namespace Portfolio.DataBridgez.Infrastructure.Persistence.Configuration;
 
@@ -13,7 +13,7 @@ public sealed class UserClaimConfiguration : IEntityTypeConfiguration<UserClaim>
 {
     public void Configure(EntityTypeBuilder<UserClaim> builder)
     {
-        builder.ToTable(Tables.UserClaims.TableName, SchemaName);
+        builder.ToTable(Table.UserClaim.TableName, SchemaName);
         
         builder.HasKey(uc => uc.Id)
             .IsClustered();
@@ -21,20 +21,20 @@ public sealed class UserClaimConfiguration : IEntityTypeConfiguration<UserClaim>
         builder.Property(uc => uc.Id)
             .IsRequired()
             .UseIdentityColumn()
-            .HasColumnName(IdentifierFieldName);
+            .HasColumnName(PrimaryKeyColumnName);
 
         builder.Property(uc => uc.ClaimType)
             .IsUnicode()
             .IsRequired(false)
-            .HasColumnName(ClaimTypeFieldName);
+            .HasColumnName(ClaimTypeColumnName);
         
         builder.Property(uc => uc.ClaimValue)
             .IsUnicode()
             .IsRequired(false)
-            .HasColumnName(ClaimValueFieldName);
+            .HasColumnName(ClaimValueColumnName);
 
         builder.Property(uc => uc.UserId)
             .IsRequired()
-            .HasColumnName(UserIdentifierFieldName);
+            .HasColumnName(UserPrimaryKeyColumnName);
     }
 }
