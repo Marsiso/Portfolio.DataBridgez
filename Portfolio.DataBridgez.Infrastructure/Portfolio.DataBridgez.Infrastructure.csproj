@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>Portfolio.Databridgez.Infrastructure</RootNamespace>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="libsodium" Version="1.0.18.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
       <PackageReference Include="Serilog" Version="2.12.0" />
       <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
@@ -37,7 +39,6 @@
       <Folder Include="Exceptions\" />
       <Folder Include="Extensions\" />
       <Folder Include="Helpers\" />
-      <Folder Include="Identity\" />
       <Folder Include="Persistence\Migrations\" />
       <Folder Include="Persistence\Seed\" />
     </ItemGroup>

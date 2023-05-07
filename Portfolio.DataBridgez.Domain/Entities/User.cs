@@ -8,9 +8,19 @@ namespace Portfolio.DataBridgez.Domain.Entities;
 public sealed class User : IdentityUser<long>
 {
     /// <summary>
-    ///     Private constructor used by Entity Framework Core.
+    ///     Parameterless constructor.
     /// </summary>
-    private User()
+    public User()
+    {
+    }
+    
+    /// <summary>
+    ///     Initializes new instance of <see cref="User"/>.
+    /// </summary>
+    /// <param name="userName">
+    ///     Application <see cref="User"/> property <see cref="IdentityUser{TKey}.UserName"/>.
+    /// </param>
+    public User(string userName) : base(userName)
     {
     }
 
