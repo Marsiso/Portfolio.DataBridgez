@@ -1,6 +1,4 @@
-﻿using Portfolio.Databridgez.Application.Interfaces;
-
-namespace Portfolio.DataBridgez.IdentityProvider.Installers;
+﻿namespace Portfolio.DataBridgez.IdentityProvider.Installers;
 
 public sealed class EndpointInstaller : IInstaller
 {

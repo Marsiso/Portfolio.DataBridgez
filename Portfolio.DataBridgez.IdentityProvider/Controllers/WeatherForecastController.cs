@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Portfolio.Databridgez.Domain.Dtos.Get;
+using Portfolio.DataBridgez.Domain.Dtos.Get;
 
 namespace Portfolio.DataBridgez.IdentityProvider.Controllers;
 

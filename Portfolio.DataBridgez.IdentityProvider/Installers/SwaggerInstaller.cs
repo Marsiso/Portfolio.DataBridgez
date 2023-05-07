@@ -1,6 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
-using Portfolio.Databridgez.Application.Interfaces;
-using Portfolio.Databridgez.Domain.Options.Swagger;
+using Portfolio.DataBridgez.Domain.Options.Swagger;
 
 namespace Portfolio.DataBridgez.IdentityProvider.Installers;
 

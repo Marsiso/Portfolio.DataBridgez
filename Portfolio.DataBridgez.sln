@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.DataBridgez.IdentityProvider", "Portfolio.DataBridgez.IdentityProvider\Portfolio.DataBridgez.IdentityProvider.csproj", "{B320FDCC-2186-412A-800B-DDF6914C5139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Databridgez.Domain", "Portfolio.Databridgez.Domain\Portfolio.Databridgez.Domain.csproj", "{095F16F9-7513-4AE6-A75C-87FAC03228B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.DataBridgez.Domain", "Portfolio.DataBridgez.Domain\Portfolio.DataBridgez.Domain.csproj", "{095F16F9-7513-4AE6-A75C-87FAC03228B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Databridgez.Application", "Portfolio.Databridgez.Application\Portfolio.Databridgez.Application.csproj", "{5CF0049F-30A1-4AED-AEA6-BC70C86887E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.DataBridgez.Application", "Portfolio.DataBridgez.Application\Portfolio.DataBridgez.Application.csproj", "{5CF0049F-30A1-4AED-AEA6-BC70C86887E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Databridgez.Infrastructure", "Portfolio.Databridgez.Infrastructure\Portfolio.Databridgez.Infrastructure.csproj", "{398AB6F8-14B9-431B-8D5A-CA55466CDB89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.DataBridgez.Infrastructure", "Portfolio.DataBridgez.Infrastructure\Portfolio.DataBridgez.Infrastructure.csproj", "{398AB6F8-14B9-431B-8D5A-CA55466CDB89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
-using Portfolio.Databridgez.Domain.Options;
-using Portfolio.Databridgez.Domain.Options.Swagger;
+using Portfolio.DataBridgez.Domain.Options;
+using Portfolio.DataBridgez.Domain.Options.Swagger;
 
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")

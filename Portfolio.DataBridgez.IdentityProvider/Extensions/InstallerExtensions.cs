@@ -1,6 +1,4 @@
-﻿using Portfolio.Databridgez.Application.Interfaces;
-
-namespace Portfolio.DataBridgez.IdentityProvider.Extensions;
+﻿namespace Portfolio.DataBridgez.IdentityProvider.Extensions;
 
 /// <summary>
 ///     <see cref="IInstaller" /> abstraction layer extension methods.
