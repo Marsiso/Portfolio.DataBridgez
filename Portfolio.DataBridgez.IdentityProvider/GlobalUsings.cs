@@ -2,3 +2,4 @@
 global using Portfolio.DataBridgez.IdentityProvider.Extensions;
 global using Portfolio.DataBridgez.Infrastructure.Factories;
 global using Serilog;
+global using ILogger = Serilog.ILogger;

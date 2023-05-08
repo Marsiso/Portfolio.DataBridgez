@@ -13,9 +13,9 @@ try
 
     var app = builder.Build();
 
+    app.ConfigureExceptionHandler(app.Environment);
     app.UseSerilogRequestLogging();
     app.ConfigureSwagger(app.Configuration, app.Environment);
-    app.ConfigureExceptionHandler(app.Environment);
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();
