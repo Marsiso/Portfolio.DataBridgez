@@ -1,6 +1,3 @@
-using Portfolio.DataBridgez.Domain.Options;
-using Portfolio.DataBridgez.Domain.Options.Swagger;
-
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
@@ -17,22 +14,8 @@ try
     var app = builder.Build();
 
     app.UseSerilogRequestLogging();
-    
-    if (app.Environment.IsDevelopment())
-    {
-        var swaggerOptions = new SwaggerOptions();
-        app.Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
-        
-        app.UseSwagger(option =>
-        {
-            option.RouteTemplate = swaggerOptions.RouteTemplate;
-        });
-        app.UseSwaggerUI(option =>
-        {
-            option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
-        });
-    }
-
+    app.ConfigureSwagger(app.Configuration, app.Environment);
+    app.ConfigureExceptionHandler(app.Environment);
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();
