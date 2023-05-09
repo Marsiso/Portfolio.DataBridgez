@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using static Portfolio.DataBridgez.Domain.Constants.AppDbDefaults;
 using static Portfolio.DataBridgez.Domain.Constants.AppDbDefaults.Tables.AppUsers;
@@ -10,6 +10,7 @@ using static Portfolio.DataBridgez.Domain.Constants.AppDbDefaults.Tables.AppUser
 
 namespace Portfolio.DataBridgez.Domain.Entities;
 
+[DataContract(Name = nameof(AppUser))]
 [Table(TableName, Schema = SchemaName)]
 [Index(nameof(NormalizedUserName), IsUnique = true)]
 [Index(nameof(NormalizedEmail), IsUnique = true)]
@@ -31,8 +32,7 @@ public sealed class AppUser : Entity
         ErrorMessage = StringLengthMessageTemplate)]
     [DisplayName(UserNameDisplayName)]
     [DataType(DataType.Text)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(UserName))]
+    [DataMember(Name = nameof(UserName))]
     public string UserName { get; set; } = default!;
 
     [Column(NormalizedUserNameColumnName)]
@@ -42,8 +42,7 @@ public sealed class AppUser : Entity
         ErrorMessage = StringLengthMessageTemplate)]
     [DisplayName(NormalizedUserNameDisplayName)]
     [DataType(DataType.Text)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(NormalizedUserName))]
+    [DataMember(Name = nameof(NormalizedUserName))]
     public string NormalizedUserName { get; set; } = default!;
 
     [Column(EmailColumnName)]
@@ -53,8 +52,7 @@ public sealed class AppUser : Entity
         ErrorMessage = MaximumStringLengthMessageTemplate)]
     [DisplayName(EmailDisplayName)]
     [DataType(DataType.EmailAddress)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(Email))]
+    [DataMember(Name = nameof(Email))]
     public string Email { get; set; } = default!;
 
     [Column(NormalizedEmailColumnName)]
@@ -64,15 +62,13 @@ public sealed class AppUser : Entity
         ErrorMessage = MaximumStringLengthMessageTemplate)]
     [DisplayName(NormalizedEmailDisplayName)]
     [DataType(DataType.EmailAddress)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(NormalizedEmail))]
+    [DataMember(Name = nameof(NormalizedEmail))]
     public string NormalizedEmail { get; set; }  = default!;
 
     [Column(EmailConfirmedColumnName)]
     [Required(ErrorMessage = RequireMessageTemplate)]
     [DisplayName(EmailConfirmedDisplayName)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(EmailConfirmed))]
+    [DataMember(Name = nameof(EmailConfirmed))]
     public bool EmailConfirmed { get; set; }
 
     [Column(PasswordHashColumnName)]
@@ -80,7 +76,6 @@ public sealed class AppUser : Entity
     [Unicode]
     [DataType(DataType.Password)]
     [DisplayName(PasswordHashDisplayName)]
-    [JsonIgnore]
     public string PasswordHash { get; set; } = default!;
 
     [Column(SecurityStampColumnName)]
@@ -88,7 +83,6 @@ public sealed class AppUser : Entity
     [Unicode]
     [DataType(DataType.Text)]
     [DisplayName(SecurityStampDisplayName)]
-    [JsonIgnore]
     public string SecurityStamp { get; set; }  = default!;
 
     [Column(ConcurrencyStampColumnName)]
@@ -96,28 +90,24 @@ public sealed class AppUser : Entity
     [Required(ErrorMessage = RequireMessageTemplate)]
     [ConcurrencyCheck]
     [Timestamp]
-    [JsonIgnore]
     public byte[] ConcurrencyStamp { get; set; }  = default!;
 
     [Column(LockoutEndColumnName)]
     [DisplayName(LockoutEndDisplayName)]
     [DataType(DataType.DateTime)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(LockoutEnd))]
+    [DataMember(Name = nameof(LockoutEnd))]
     public DateTimeOffset? LockoutEnd { get; set; }
 
     [Column(LockoutEnabledColumnName)]
     [DisplayName(LockoutEnabledDisplayName)]
     [Required(ErrorMessage = RequireMessageTemplate)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(LockoutEnabled))]
+    [DataMember(Name = nameof(LockoutEnabled))]
     public bool LockoutEnabled { get; set; } = true;
 
     [Column(AccessFailedCountColumnName)]
     [DisplayName(AccessFailedCountDisplayName)]
     [Required(ErrorMessage = RequireMessageTemplate)]
-    [JsonInclude]
-    [JsonPropertyName(nameof(AccessFailedCount))]
+    [DataMember(Name = nameof(AccessFailedCount))]
     public int AccessFailedCount { get; set; }
 
     public override string ToString()

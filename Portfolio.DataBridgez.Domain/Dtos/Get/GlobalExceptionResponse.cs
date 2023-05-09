@@ -1,22 +1,21 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Text.Json;
 
 namespace Portfolio.DataBridgez.Domain.Dtos.Get;
 
+[DataContract(Name = nameof(GlobalExceptionResponse))]
 public sealed class GlobalExceptionResponse
 {
     /// <summary>
     ///     Exception details.
     /// </summary>
-    [JsonInclude]
-    [JsonPropertyName(nameof(Message))]
+    [DataMember(Name = nameof(Message))]
     public string Message { get; set; }
 
     /// <summary>
     ///     HTTP status code.
     /// </summary>
-    [JsonInclude]
-    [JsonPropertyName(nameof(StatusCode))]
+    [DataMember(Name = nameof(StatusCode))]
     public int StatusCode { get; set; }
 
     public GlobalExceptionResponse(string message, int statusCode)

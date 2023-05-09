@@ -72,19 +72,16 @@ public sealed class RegisterInputCredentialsTakenFilter : IAsyncActionFilter
                 StatusCode = StatusCodes.Status400BadRequest,
                 Message = Format("User with user name {0} and email {1} already exists", registerUserInput.UserName,
                     registerUserInput.Email),
-                Errors = null
             },
             (true, false) => new RegisterResponse
             {
                 StatusCode = StatusCodes.Status400BadRequest,
                 Message = Format("User with user name {0} already exists", registerUserInput.UserName),
-                Errors = null
             },
             (false, true) => new RegisterResponse
             {
                 StatusCode = StatusCodes.Status400BadRequest,
                 Message = Format("User with email {0} already exists", registerUserInput.Email),
-                Errors = null
             },
             _ => throw new ArgumentOutOfRangeException()
         };

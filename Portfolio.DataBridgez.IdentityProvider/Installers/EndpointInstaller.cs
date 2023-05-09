@@ -10,7 +10,7 @@ public sealed class EndpointInstaller : IInstaller
 {
     public void RegisterServices(IServiceCollection services, IConfiguration config)
     {
-        services.AddMvc();
+        services.AddMvc().AddXmlDataContractSerializerFormatters();
         services.AddEndpointsApiExplorer();
         services.AddScoped<RegisterInputValidationFilter>();
         services.AddScoped<RegisterInputCredentialsTakenFilter>();

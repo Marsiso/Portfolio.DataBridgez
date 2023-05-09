@@ -1,31 +1,30 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Xml.Serialization;
 using FluentValidation.Results;
 
 namespace Portfolio.DataBridgez.Domain.Dtos.Get;
 
+[DataContract(Name = nameof(RegisterResponse))]
 public sealed class RegisterResponse
 {
     /// <summary>
     ///     HTTP status code.
     /// </summary>
-    [JsonInclude]
-    [JsonPropertyName(nameof(StatusCode))]
+    [DataMember(Name = nameof(StatusCode))]
     public int StatusCode { get; set; }
 
     /// <summary>
     ///     Description.
     /// </summary>
-    [JsonInclude]
-    [JsonPropertyName(nameof(Message))]
+    [DataMember(Name = nameof(Message))]
     public string? Message { get; set; }
 
     /// <summary>
     ///     Collection of model validation errors.
     /// </summary>
-    [JsonInclude]
-    [JsonPropertyName(nameof(Errors))]
-    public List<ValidationFailure>? Errors { get; set; }
+    [DataMember(Name = nameof(ValidationFailures))]
+    public List<ValidationFailureResponse>? ValidationFailures { get; set; }
 
     public override string ToString()
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Portfolio.Databridgez.Application.Mappings;
 using Portfolio.DataBridgez.Domain.Dtos.Get;
 using Portfolio.Databridgez.Domain.Dtos.Post;
 using Portfolio.Databridgez.Domain.Validators;
@@ -26,7 +27,6 @@ public sealed class RegisterInputValidationFilter : IActionFilter
             {
                 StatusCode = StatusCodes.Status400BadRequest,
                 Message = Format("Object sent from the client is null. Controller: {0}, action: {1}", controller, action),
-                Errors = null
             };
             
             context.Result = new BadRequestObjectResult(response);
@@ -43,7 +43,7 @@ public sealed class RegisterInputValidationFilter : IActionFilter
             {
                 StatusCode = StatusCodes.Status422UnprocessableEntity,
                 Message = Format("Object model sent from the client is invalid. Controller: {0}, action: {1}", controller, action),
-                Errors =  validationResult.Errors
+                ValidationFailures =  validationResult.Errors.MapSourceToDestination(new List<ValidationFailureResponse>())
             };
             
             context.Result = new UnprocessableEntityObjectResult(response);
