@@ -4,19 +4,19 @@ namespace Portfolio.DataBridgez.IdentityProvider.Extensions;
 
 public static class SwaggerMiddlewareExtensions
 {
-    public static void ConfigureSwagger(this IApplicationBuilder applicationBuilder,
-        IConfiguration configuration, IWebHostEnvironment environment)
+    public static void ConfigureSwagger(this IApplicationBuilder app,
+        IConfiguration config, IWebHostEnvironment env)
     {
-        if (environment.IsDevelopment())
+        if (env.IsDevelopment())
         {
             var swaggerOptions = new SwaggerOptions();
-            configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+            config.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
         
-            applicationBuilder.UseSwagger(option =>
+            app.UseSwagger(option =>
             {
                 option.RouteTemplate = swaggerOptions.RouteTemplate;
             });
-            applicationBuilder.UseSwaggerUI(option =>
+            app.UseSwaggerUI(option =>
             {
                 option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
             });

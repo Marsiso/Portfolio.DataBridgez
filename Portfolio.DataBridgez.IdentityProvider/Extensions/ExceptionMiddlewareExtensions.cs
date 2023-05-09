@@ -6,21 +6,21 @@ namespace Portfolio.DataBridgez.IdentityProvider.Extensions;
 
 public static class ExceptionMiddlewareExtensions
 {
-    public static void ConfigureExceptionHandler(this IApplicationBuilder applicationBuilder,
-        IWebHostEnvironment environment, ILogger logger)
+    public static void ConfigureExceptionHandler(this IApplicationBuilder app,
+        IWebHostEnvironment env, ILogger logger)
     {
-        if (environment.IsDevelopment())
+        if (env.IsDevelopment())
         {
-            applicationBuilder.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
         }
         else
         {
-            applicationBuilder.UseExceptionHandler(options =>
+            app.UseExceptionHandler(options =>
             {
                 options.Run(async context =>
                 {
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    context.Response.ContentType = "application/json";
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    context.Response.ContentType = MediaTypeNames.Application.Json;
                     
                     var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (exceptionHandlerFeature != null)
@@ -37,16 +37,16 @@ public static class ExceptionMiddlewareExtensions
         }
     }
     
-    public static void ConfigureExceptionHandler(this IApplicationBuilder applicationBuilder,
-        IWebHostEnvironment environment)
+    public static void ConfigureExceptionHandler(this IApplicationBuilder app,
+        IWebHostEnvironment env)
     {
-        if (environment.IsDevelopment())
+        if (env.IsDevelopment())
         {
-            applicationBuilder.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
         }
         else
         {
-            applicationBuilder.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
         }
     }
 }

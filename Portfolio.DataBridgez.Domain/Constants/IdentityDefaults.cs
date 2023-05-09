@@ -68,6 +68,12 @@ public static class IdentityDefaults
         
         /// <summary>
         ///     ASP.NET Core Identity <see cref="PasswordOptions"/> property
+        ///     <see cref="PasswordOptions.RequiredLength"/> extension that specifies upper bound value.
+        /// </summary>
+        public const int FullLength = 100;
+        
+        /// <summary>
+        ///     ASP.NET Core Identity <see cref="PasswordOptions"/> property
         ///     <see cref="PasswordOptions.RequiredUniqueChars"/> defaults.
         /// </summary>
         public const int RequiredUniqueChars = 1;

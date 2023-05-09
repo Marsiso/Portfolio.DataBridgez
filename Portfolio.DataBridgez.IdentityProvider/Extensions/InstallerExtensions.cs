@@ -9,8 +9,8 @@ public static class InstallerExtensions
     ///     Initializes and executes every implementation of <see cref="IInstaller" /> in assembly.
     /// </summary>
     /// <param name="services">Application abstraction for collection of services.</param>
-    /// <param name="configuration">Application abstraction for configuration properties.</param>
-    public static void InstallServicesInAssembly(this IServiceCollection services, IConfiguration configuration)
+    /// <param name="config">Application abstraction for configuration properties.</param>
+    public static void InstallServicesInAssembly(this IServiceCollection services, IConfiguration config)
     {
         var installers = typeof(Program).Assembly.ExportedTypes
             .Where(exportedType => typeof(IInstaller).IsAssignableFrom(exportedType) &&
@@ -19,6 +19,6 @@ public static class InstallerExtensions
             .Cast<IInstaller>()
             .ToList();
 
-        installers.ForEach(installer => installer.RegisterServices(services, configuration));
+        installers.ForEach(installer => installer.RegisterServices(services, config));
     }
 }

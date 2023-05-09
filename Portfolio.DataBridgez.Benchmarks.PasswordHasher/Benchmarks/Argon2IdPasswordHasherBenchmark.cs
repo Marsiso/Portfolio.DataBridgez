@@ -8,20 +8,20 @@ namespace Portfolio.DataBridgez.Benchmarks.PasswordHasher.Benchmarks;
 [MemoryDiagnoser]
 public class Argon2IdPasswordHasherBenchmark
 {
-    private IPasswordHasher<User> PasswordHasher { get; set; } = null!;
-    private User User { get; set; } = null!;
+    private IPasswordHasher<AppUser> PasswordHasher { get; set; } = null!;
+    private AppUser AppUser { get; set; } = null!;
     private const string Password = "PasswordSample123$";
 
     [GlobalSetup]
     public void GlobalSetup()
     {
         PasswordHasher = Activator.CreateInstance<Argon2IdPasswordHasher>();
-        User = Activator.CreateInstance<User>();
+        AppUser = Activator.CreateInstance<AppUser>();
     }
 
     [Benchmark]
     public string HashPassword()
     {
-        return PasswordHasher.HashPassword(User, Password);
+        return PasswordHasher.HashPassword(AppUser, Password);
     }
 }

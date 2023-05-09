@@ -9,9 +9,9 @@ namespace Portfolio.DataBridgez.Application.Interfaces;
 public interface IInstaller
 {
     /// <summary>
-    ///     Registers service into application service collection.
+    ///     Registers service into the service collection.
     /// </summary>
-    /// <param name="services">Application abstraction for service collection.</param>
-    /// <param name="configuration">Application abstraction for configuration properties.</param>
-    public void RegisterServices(IServiceCollection services, IConfiguration configuration);
+    /// <param name="services">An abstraction for the service collection.</param>
+    /// <param name="config">An abstraction for configuration properties.</param>
+    void RegisterServices(IServiceCollection services, IConfiguration config);
 }

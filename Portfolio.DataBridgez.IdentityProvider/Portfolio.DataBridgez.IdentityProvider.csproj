@@ -26,6 +26,7 @@
 
     <ItemGroup>
       <Folder Include="Identity\" />
+      <Folder Include="Logs\" />
       <Folder Include="Persistence\Migrations\" />
     </ItemGroup>
 

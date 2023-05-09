@@ -1,4 +1,5 @@
 ﻿using Portfolio.DataBridgez.Infrastructure.Persistence;
+using Portfolio.DataBridgez.Infrastructure.Persistence.Repositories;
 
 namespace Portfolio.DataBridgez.IdentityProvider.Installers;
 
@@ -7,14 +8,14 @@ namespace Portfolio.DataBridgez.IdentityProvider.Installers;
 /// </summary>
 public sealed class DbInstaller : IInstaller
 {
-    public void RegisterServices(IServiceCollection services, IConfiguration configuration)
+    public void RegisterServices(IServiceCollection services, IConfiguration config)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = config.GetConnectionString("DefaultConnection");
         ArgumentException.ThrowIfNullOrEmpty(connectionString);
         
-        services.AddSqlServer<ApplicationDbContext>(connectionString,
+        services.AddSqlServer<AppDbContext>(connectionString,
             optionsBuilder => optionsBuilder.MigrationsAssembly("Portfolio.DataBridgez.IdentityProvider"));
 
-        services.AddDatabaseDeveloperPageExceptionFilter();
+        services.AddScoped<IRepository<AppUser>, Repository<AppUser>>();
     }
 }

@@ -39,7 +39,6 @@
       <Folder Include="Exceptions\" />
       <Folder Include="Extensions\" />
       <Folder Include="Helpers\" />
-      <Folder Include="Persistence\Migrations\" />
       <Folder Include="Persistence\Seed\" />
     </ItemGroup>
 

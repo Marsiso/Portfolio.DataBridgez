@@ -2,20 +2,19 @@
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-using Portfolio.DataBridgez.Domain.Entities;
 
 namespace Portfolio.Databridgez.Infrastructure.Identity;
 
-public sealed class Pbkdf2PasswordHasher : IPasswordHasher<User>
+public sealed class Pbkdf2PasswordHasher : IPasswordHasher<AppUser>
 {
     private const int KeySize = 32;
     private const int SaltSize = 16;
     private const int Cycles = 1_572_864;
     private const char Delimiter = ';';
     
-    public string HashPassword(User user, string password)
+    public string HashPassword(AppUser appUser, string password)
     {
-        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(appUser);
         ArgumentException.ThrowIfNullOrEmpty(password);
         
         // Generate 128 bit salt
@@ -36,13 +35,13 @@ public sealed class Pbkdf2PasswordHasher : IPasswordHasher<User>
             Delimiter,
             Convert.ToBase64String(salt));
 
-        user.PasswordHash = passwordHashBase64;
+        appUser.PasswordHash = passwordHashBase64;
         return passwordHashBase64;
     }
 
-    public PasswordVerificationResult VerifyHashedPassword(User user, string hashedPassword, string providedPassword)
+    public PasswordVerificationResult VerifyHashedPassword(AppUser appUser, string hashedPassword, string providedPassword)
     {
-        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(appUser);
         ArgumentException.ThrowIfNullOrEmpty(hashedPassword);
         ArgumentException.ThrowIfNullOrEmpty(providedPassword);
 

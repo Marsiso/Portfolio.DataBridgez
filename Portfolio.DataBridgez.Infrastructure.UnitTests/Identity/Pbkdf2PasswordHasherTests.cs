@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Portfolio.DataBridgez.Domain.Entities;
 using Portfolio.Databridgez.Infrastructure.Identity;
 
@@ -14,8 +13,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void HashPassword_NullReferencePassword_ThrowException()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         string Action() => passwordHasher.HashPassword(user, null!);
 
         // Act
@@ -29,8 +28,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void HashPassword_EmptyStringAsPassword_ThrowException()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         string Action() => passwordHasher.HashPassword(user, string.Empty);
 
         // Act
@@ -44,8 +43,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void HashPassword_Password_ReturnHash()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
 
         // Act
         var passwordHash = passwordHasher.HashPassword(user, "PasswordSample123$");
@@ -61,8 +60,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void VerifyPassword_NullReferenceProvidedPassword_ThrowException()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         void Action() =>
             passwordHasher.VerifyHashedPassword(user, "KeyAsBase64;SaltAsBase64", null!);
 
@@ -77,8 +76,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void VerifyPassword_EmptyStringProvidedPassword_ThrowException()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         void Action() =>
             passwordHasher.VerifyHashedPassword(user, "KeyAsBase64;SaltAsBase64", string.Empty);
 
@@ -93,8 +92,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void VerifyPassword_NullReferenceHashedPassword_ThrowException()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         void Action() =>
             passwordHasher.VerifyHashedPassword(user, null!, "PasswordSample123$");
 
@@ -109,8 +108,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void VerifyPassword_EmptyStringHashedPassword_ThrowException()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         void Action() =>
             passwordHasher.VerifyHashedPassword(user, string.Empty, "PasswordSample123$");
 
@@ -128,15 +127,15 @@ public sealed class Pbkdf2PasswordHasherTests
         var passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         
         // Assert
-        passwordHasher.Should().BeAssignableTo<IPasswordHasher<User>>();
+        passwordHasher.Should().BeAssignableTo<IPasswordHasher<AppUser>>();
     }
     
     [Fact]
     public void HashPassword_WithRandomSalt_ReturnUniquePasswordHash()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         var passwordHashesLength = 5;
         var passwordHashes = new string[passwordHashesLength];
 
@@ -156,8 +155,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void HashPassword_ThanVerify_ReturnSuccessVerificationResult()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         const string password = "SamplePassword123$";
         
         // Act
@@ -172,8 +171,8 @@ public sealed class Pbkdf2PasswordHasherTests
     public void HashPassword_ThanVerify_ReturnFailedVerificationResult()
     {
         // Arrange
-        var user = Activator.CreateInstance<User>();
-        IPasswordHasher<User> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
+        var user = Activator.CreateInstance<AppUser>();
+        IPasswordHasher<AppUser> passwordHasher = Activator.CreateInstance<Pbkdf2PasswordHasher>();
         const string password = "SamplePassword123$";
         
         // Act

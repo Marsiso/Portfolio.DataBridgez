@@ -3,14 +3,13 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-using Portfolio.DataBridgez.Domain.Entities;
 
 namespace Portfolio.Databridgez.Infrastructure.Identity;
 
 /// <summary>
 ///     Argon2id password hashing provider.
 /// </summary>
-public sealed class Argon2IdPasswordHasher : IPasswordHasher<User>
+public sealed class Argon2IdPasswordHasher : IPasswordHasher<AppUser>
 {
     /// <summary>
     ///     API name that provides unmanaged methods.
@@ -58,12 +57,12 @@ public sealed class Argon2IdPasswordHasher : IPasswordHasher<User>
     /// <summary>
     ///     Computes password hash.
     /// </summary>
-    /// <param name="user"></param>
+    /// <param name="appUser"></param>
     /// <param name="password">Password to be hashed.</param>
     /// <returns>Password hash that consist of key and salt encoded as Base64 strings separated by delimiter.</returns>
-    public string HashPassword(User user, string? password)
+    public string HashPassword(AppUser appUser, string? password)
     {
-        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(appUser);
         ArgumentException.ThrowIfNullOrEmpty(password);
 
         // Generate salt
@@ -95,21 +94,21 @@ public sealed class Argon2IdPasswordHasher : IPasswordHasher<User>
             Delimiter,
             Convert.ToBase64String(salt));
 
-        user.PasswordHash = passwordHash;
+        appUser.PasswordHash = passwordHash;
         return passwordHash;
     }
 
     /// <summary>
     ///     Compares password against its password hash.
     /// </summary>
-    /// <param name="user"></param>
+    /// <param name="appUser"></param>
     /// <param name="hashedPassword">Password to be compared.</param>
     /// <param name="providedPassword">Password hash that consists of salt and key encoded as Base64 strings and delimiter.</param>
     /// <exception cref="ArgumentNullException">Thrown when either password or its hash is null reference object or empty string</exception>
     /// <returns>True - Password matches, False - Otherwise.</returns>
-    public PasswordVerificationResult VerifyHashedPassword(User user, string hashedPassword, string providedPassword)
+    public PasswordVerificationResult VerifyHashedPassword(AppUser appUser, string hashedPassword, string providedPassword)
     {
-        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(appUser);
         ArgumentException.ThrowIfNullOrEmpty(hashedPassword);
         ArgumentException.ThrowIfNullOrEmpty(providedPassword);
 

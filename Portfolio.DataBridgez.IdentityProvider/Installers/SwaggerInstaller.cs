@@ -8,10 +8,10 @@ namespace Portfolio.DataBridgez.IdentityProvider.Installers;
 /// </summary>
 public sealed class SwaggerInstaller : IInstaller
 {
-    public void RegisterServices(IServiceCollection services, IConfiguration configuration)
+    public void RegisterServices(IServiceCollection services, IConfiguration config)
     {
         var swaggerOptions = new SwaggerOptions();
-        configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+        config.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
         services.AddSwaggerGen(options =>
         {

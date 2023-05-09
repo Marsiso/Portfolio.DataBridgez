@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Portfolio.DataBridgez.Domain.Dtos.Get;
+﻿using Portfolio.DataBridgez.Domain.Dtos.Get;
 
 namespace Portfolio.DataBridgez.IdentityProvider.Middlewares;
 
@@ -27,8 +26,8 @@ public sealed class ExceptionMiddleware : IMiddleware
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Response.ContentType = MediaTypeNames.Application.Json;
+        context.Response.StatusCode =  StatusCodes.Status500InternalServerError;
 
         var message = exception switch
         {
@@ -41,7 +40,7 @@ public sealed class ExceptionMiddleware : IMiddleware
             _ => "Internal server error caught by exception handler"
         };
 
-        var response = new ExceptionDetailsResponse(message, context.Response.StatusCode);
+        var response = new GlobalExceptionResponse(message,  StatusCodes.Status500InternalServerError);
         await context.Response.WriteAsync(response.ToString());
     }
 }
