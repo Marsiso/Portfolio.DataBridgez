@@ -17,7 +17,6 @@ try
     app.UseSerilogRequestLogging();
     app.ConfigureSwagger(app.Configuration, app.Environment);
     app.UseHttpsRedirection();
-    app.UseAuthorization();
     app.MapControllers();
 
     Log.Information("Identity provider application is starting up");

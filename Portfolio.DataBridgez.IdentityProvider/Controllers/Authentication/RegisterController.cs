@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Databridgez.Application.Mappings;
 using Portfolio.DataBridgez.Domain.Dtos.Get;
@@ -12,6 +13,7 @@ namespace Portfolio.DataBridgez.IdentityProvider.Controllers.Authentication;
 /// <summary>
 ///     Endpoints related to the user sign in tasks.
 /// </summary>
+[AllowAnonymous]
 public sealed class RegisterController : ApiControllerBase
 {
     /// <summary>
@@ -38,6 +40,7 @@ public sealed class RegisterController : ApiControllerBase
     [Produces(MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status415UnsupportedMediaType)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<RegisterResponse>> Signin(
